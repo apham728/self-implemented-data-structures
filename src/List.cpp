@@ -70,6 +70,50 @@ ArrayList::~ArrayList() {
     delete[] buf;
 }
 
+// !!! LISTNODE STATIC METHODS !!!
+ListNode * ListNode::find(const string & word, ListNode * L) {
+    for(ListNode* curr = L; curr != nullptr; curr = curr->next) {
+        if (curr->data == word) return curr;
+    }
+    return nullptr;
+}
+
+void ListNode::remove(const string & word, ListNode * & L) {
+    if (L != nullptr && L->data == word) {
+        ListNode* temp = L;
+        L = L->next;
+        delete temp;
+        return;
+    }
+
+    for (ListNode* curr = L; curr != nullptr && curr->next != nullptr; curr = curr->next) {
+        if (curr->next->data == word) {
+            ListNode* temp = curr->next;
+            curr->next = curr->next->next;
+            delete temp;
+            return;
+        }
+    }
+
+    error(word, "Trying to remove a word that doesn't exist in the linked list");
+    return;
+}
+
+void ListNode::delete_list(ListNode * L) {
+    while(L != nullptr) {
+        ListNode* temp = L;
+        L = L->next;
+        delete temp;
+    }    
+}
+
+void ListNode::print(ostream & out, ListNode * L) {
+    for (ListNode* curr = L; curr != nullptr; curr = curr->next) {
+        out << curr->data << endl;
+    }
+}
+
+
 ostream & operator << (ostream & out, List & L) {
     L.print(out);
     return out;
