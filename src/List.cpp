@@ -113,6 +113,28 @@ void ListNode::print(ostream & out, ListNode * L) {
     }
 }
 
+// !!!  LINKED LIST !!!
+
+LinkedList::LinkedList()
+    : List("LinkedList"),
+        head(nullptr) {}
+
+void LinkedList::insert(const string & word) {
+    // unordered list so just insert at head
+    ListNode* temp = new ListNode(word, head);
+    head = temp;
+}
+
+bool LinkedList::find(const string & word) {
+    ListNode* index = ListNode::find(word, head);
+    if (index != nullptr) return true;
+    return false;
+}
+
+void LinkedList::remove(const string & word) {
+    ListNode::remove(word, head);
+}
+
 
 ostream & operator << (ostream & out, List & L) {
     L.print(out);
