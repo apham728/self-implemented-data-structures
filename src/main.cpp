@@ -9,8 +9,8 @@ int main(int argc, char** argv) {
         return 1;
     }
 
-    string input_file = "words.txt";
-    
+    string input_file = argv[1];
+
     cout << "Running list benchmarks with input file: "
          << input_file << endl;
 
