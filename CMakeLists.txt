@@ -22,21 +22,29 @@ target_include_directories(hw PRIVATE
 
 find_package(GTest REQUIRED)
 
-add_executable(hw_gtests
-    ${SRC_FILES_EXCEPT_MAIN}
+enable_testing()
+include(GoogleTest)
+
+set(TEST_FILES
     tests/test_list.cpp
 )
 
-target_include_directories(hw_gtests PRIVATE
-    ${CMAKE_SOURCE_DIR}/src
-)
+foreach(TEST_FILE ${TEST_FILES})
+    get_filename_component(TEST_NAME ${TEST_FILE} NAME_WE)
 
-target_link_libraries(hw_gtests PRIVATE
-    GTest::gtest
-    GTest::gtest_main
-)
+    add_executable(${TEST_NAME}
+        ${SRC_FILES_EXCEPT_MAIN}
+        ${TEST_FILE}
+    )
 
-enable_testing()
+    target_include_directories(${TEST_NAME} PRIVATE
+        ${CMAKE_SOURCE_DIR}/src
+    )
 
-include(GoogleTest)
-gtest_discover_tests(hw_gtests)
+    target_link_libraries(${TEST_NAME} PRIVATE
+        GTest::gtest
+        GTest::gtest_main
+    )
+
+    gtest_discover_tests(${TEST_NAME})
+endforeach()
