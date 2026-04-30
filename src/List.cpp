@@ -165,3 +165,72 @@ ostream & operator << (ostream & out, List & L) {
 void error(string word, string msg) {
     cerr << "ERROR: " << msg << " caused by the word: " << word;
 }
+
+void insert_all_words(int k, string file_name, List & L) {
+    Timer t;
+    double eTime;
+    ifstream in(file_name); 
+    if (!in) {
+        error(file_name, "could not open file");
+    }   
+    int limit = k * NWORDS / 10; // k represents tenths of input file; k = 1 = 10% of file; k = 2 = 20% of file; ...
+    t.start();
+    for (string word; (in >> word) && limit > 0; --limit)
+        L.insert(word);
+    t.elapsedUserTime(eTime);
+    in.close();
+    cout << "\t\tInsert = " << eTime << endl;
+}
+
+void find_all_words(int k, string file_name, List & L) {
+    Timer t;
+    double eTime;
+    ifstream in(file_name);
+    if (!in) {
+        error(file_name, "could not open file");
+    }
+    int limit = k * NWORDS / 10;
+    t.start();
+    for (string word; (in >> word) && limit > 0; --limit)
+        L.find(word);
+    t.elapsedUserTime(eTime);
+    in.close();
+    cout << "\t\tFind = " << eTime << endl;
+}
+
+void remove_all_words(int k, string file_name, List & L) {
+    Timer t;
+    double eTime;
+    ifstream in(file_name);
+    if (!in) {
+        error(file_name, "could not open file");
+    }
+    int limit = k * NWORDS / 10;
+    t.start();
+    for (string word; (in >> word) && limit > 0; --limit)
+        L.remove(word);
+    t.elapsedUserTime(eTime);
+    in.close();
+    cout << "\t\tRemove = " << eTime << endl;
+}
+
+void measure_list_methods(string file_name, List & L) {
+    cout << L.name << endl;
+    for (int K = 1; K <= 10; ++K) {
+        cout << "\tK = " << K << endl;
+        insert_all_words(K, file_name, L);
+        find_all_words(K, file_name, L);
+        remove_all_words(K, file_name, L);
+        if (!L.is_empty() )
+            error(L.name, "is not empty");
+    }
+        
+}
+
+void measure_lists(string input_file) {
+    ArrayList AL(NWORDS);
+    LinkedList LL;
+
+    measure_list_methods(input_file, AL);
+    measure_list_methods(input_file, LL);
+}
