@@ -135,6 +135,27 @@ void LinkedList::remove(const string & word) {
     ListNode::remove(word, head);
 }
 
+bool LinkedList::is_empty() {
+    return head == nullptr;
+}
+
+bool LinkedList::is_full() {
+    return false; // in a sense, linked lists continue to grow without much of a limitation besides memory
+}
+
+void LinkedList::erase() {
+    ListNode::delete_list(head);
+    head = nullptr;
+}
+
+void LinkedList::print(ostream & out) {
+    ListNode::print(out, head);
+}
+
+LinkedList::~LinkedList() {
+    ListNode::delete_list(head);
+}
+
 
 ostream & operator << (ostream & out, List & L) {
     L.print(out);
