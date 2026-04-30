@@ -69,3 +69,12 @@ void ArrayList::print(ostream & out) {
 ArrayList::~ArrayList() {
     delete[] buf;
 }
+
+ostream & operator << (ostream & out, List & L) {
+    L.print(out);
+    return out;
+}
+
+void error(string word, string msg) {
+    cerr << "ERROR: " << msg << " caused by the word: " << word;
+}
