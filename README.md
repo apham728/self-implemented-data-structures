@@ -11,17 +11,16 @@ A custom implementation of fundamental data structures in C++, built from scratc
 
 ## Implemented Data Structures
 
-* ArrayList (dynamic array)
+* ArrayList
 * LinkedList (singly linked list)
-* Stack (array and linked list style)
-* Queue (array and linked list style)
 
 ## In Progress
 
-* 
+* Stack (array and linked list style)
 
 ## Planned
 
+* Queue (array and linked list style)
 * HashMap (chained or open addressing)
 * Binary Search Tree
 
@@ -31,7 +30,7 @@ A custom implementation of fundamental data structures in C++, built from scratc
 #include "ArrayList.h"
 #include "LinkedListt.h"
 #include "Queue.h"
-#include "Staack.h"
+#include "Stack.h"
 
 int main() {
     ... // To be added
