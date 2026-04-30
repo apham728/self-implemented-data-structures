@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.14)
 
-project(hw CXX)
+project(data_structures CXX)
 
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_EXTENSIONS OFF)
@@ -11,12 +11,12 @@ set(SRC_FILES_EXCEPT_MAIN
     src/List.cpp
 )
 
-add_executable(hw
+add_executable(benchmarks
     ${SRC_FILES_EXCEPT_MAIN}
     src/main.cpp
 )
 
-target_include_directories(hw PRIVATE
+target_include_directories(benchmarks PRIVATE
     ${CMAKE_SOURCE_DIR}/src
 )
 
